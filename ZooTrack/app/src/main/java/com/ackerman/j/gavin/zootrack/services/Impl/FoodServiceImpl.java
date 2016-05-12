@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 
+import com.ackerman.j.gavin.zootrack.Domain.Animal;
 import com.ackerman.j.gavin.zootrack.Domain.Food;
 import com.ackerman.j.gavin.zootrack.Repository.FoodRepository;
 import com.ackerman.j.gavin.zootrack.Repository.Impl.FoodRepositoryImpl;
@@ -43,8 +44,7 @@ public class FoodServiceImpl extends Service implements FoodService {
         }
     }
     @Override
-    public boolean addStock(int stock,Food food) {
-        try{
+    public int addStock(int stock,Food food) {
 
             Food found = repository.findById(food.getId());
             Food updatedFood = new Food.Builder()
@@ -54,19 +54,14 @@ public class FoodServiceImpl extends Service implements FoodService {
                     .stock(found.getStock()+stock)
                     .type(found.getType())
                     .build();
-            return repository.update(updatedFood).getId() == food.getId();
-        }
-        catch(Exception x)
-        {
-            x.printStackTrace();
-        }
-        return false;
+             repository.update(updatedFood);
+            return updatedFood.getStock();
+
     }
 
     @Override
-    public boolean removeStock(int stock,Food food) {
-        try{
-
+    public int removeStock(int stock,Food food) {
+        //
             Food found = repository.findById(food.getId());
             Food updatedFood = new Food.Builder()
                     .id(found.getId())
@@ -75,12 +70,25 @@ public class FoodServiceImpl extends Service implements FoodService {
                     .stock(found.getStock()-stock)
                     .type(found.getType())
                     .build();
-            return repository.update(updatedFood).getId() == food.getId();
-        }
+         repository.update(updatedFood);
+        return updatedFood.getStock();
+    /*    }
         catch(Exception x)
         {
             x.printStackTrace();
         }
-        return false;
+        return false;*/
+    }
+    @Override
+    public Food addFood(Food food) {
+        try{
+            return repository.save(food);
+        }
+        catch(Exception x)
+
+        {
+            x.printStackTrace();
+        }
+        return null;
     }
 }

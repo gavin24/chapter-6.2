@@ -21,7 +21,7 @@ public class AnimalServiceTest extends AndroidTestCase
 {
     private AnimalServiceImpl animalService;
     private boolean isBound;
-    Animal animal = new Animal();
+    Animal testanimal = new Animal();
     private Long id;
 
     @Override
@@ -30,12 +30,13 @@ public class AnimalServiceTest extends AndroidTestCase
         Intent intent = new Intent(this.getContext(), AnimalServiceImpl.class);
         this.mContext.bindService(intent, connection, Context.BIND_AUTO_CREATE);
         //Create
-        animal = new Animal.Builder()
+        testanimal = new Animal.Builder()
                 .name("John")
-                .species("bear")
+                .species("bearrr")
                 .age(24)
                 .Country("england")
                 .build();
+        animalService.addAnimal(testanimal);
     }
 
     private ServiceConnection connection = new ServiceConnection() {
@@ -54,12 +55,20 @@ public class AnimalServiceTest extends AndroidTestCase
         }
     };
 
-    @Test
-    public void testGetAllAnimals()
-    {
-        Assert.assertNotNull(animalService.getAllAnimals());
-    }
 
+    @Test
+    public void testDeleteAnimal()
+    {
+        Animal animal = new Animal.Builder()
+                .name("delete")
+                .species("pig")
+                .age(24)
+                .Country("spain")
+                .build();
+        animal = animalService.addAnimal(animal);
+        animalService.deleteAnimal(animal);
+        Assert.assertNull(animal.getId());
+    }
     @Test
     public void testCreateAnimal()
     {
@@ -72,19 +81,41 @@ public class AnimalServiceTest extends AndroidTestCase
         animal = animalService.addAnimal(animal);
         Assert.assertNotNull(animal.getId());
     }
+    @Test
+    public void testGetAnimal()
+    {
 
+        Assert.assertNotNull(animalService.getAnimal(testanimal.getId()));
+    }
+    @Test
+    public void testGetAllAnimals()
+    {
+        Assert.assertNotNull(animalService.getAllAnimals());
+    }
     @Test
     public void testUpdateAnimal()
     {
         Animal animal = new Animal.Builder()
-                .name("Peter")
+                .name("george")
                 .species("bear")
                 .age(24)
                 .Country("england")
                 .build();
-        animalService.updateAnimal(animal);
-      //  Animal newEntity = animalService.(id);
-        Assert.assertEquals("george",animal.getName());
-       // Assert.assertTrue(animalService.updateAnimal(animal));
+        animalService.addAnimal(animal);
+
+        Animal updateEntity = new Animal.Builder()
+                .copy(animal)
+                .Country("mexico")
+                .build();
+      Animal newA =  animalService.updateAnimal(updateEntity);
+        Assert.assertEquals("mexico", newA.getCountry());
+
     }
+
+    @Test
+    public void testDeleteAllAnimals()
+    {
+        Assert.assertEquals(0,animalService.removeAllAnimals());
+    }
+
 }

@@ -13,6 +13,8 @@ public interface AnimalService {
     Animal addAnimal(Animal animal);
     Animal updateAnimal( Animal animal);
    Animal deleteAnimal( Animal animal);
+    Animal getAnimal(Long d);
     ArrayList<Animal> getAllAnimals( );
+
     int removeAllAnimals();
 }

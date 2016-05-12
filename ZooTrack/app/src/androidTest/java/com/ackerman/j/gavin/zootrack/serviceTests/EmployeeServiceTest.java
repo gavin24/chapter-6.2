@@ -7,8 +7,13 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.test.AndroidTestCase;
 
+import com.ackerman.j.gavin.zootrack.Domain.Animal;
 import com.ackerman.j.gavin.zootrack.Domain.Employee;
 import com.ackerman.j.gavin.zootrack.services.Impl.EmployeeServiceImpl;
+
+import junit.framework.Assert;
+
+import org.junit.Test;
 
 /**
  * Created by gavin.ackerman on 2016-05-11.
@@ -51,5 +56,21 @@ public class EmployeeServiceTest extends AndroidTestCase {
         }
     };
 
+    @Test
+    public void testIsAuthentic()
+    {
+        employee = new Employee.Builder()
+                .name("Alec")
+                .surname("James")
+                .age(34)
+                .Country("SA")
+                .password("w32352d")
+                .email("blah@gmail.com")
+                .build();
+        employeeService.addEmployee(employee);
+        boolean authentic = employeeService.isAuthentic(employee.getEmail(),employee.getPassword());
 
+        Assert.assertTrue(authentic);
+
+    }
 }

@@ -67,13 +67,7 @@ public class AnimalServiceImpl extends Service implements AnimalService {
     public Animal deleteAnimal(Animal animal) {
         return repository.delete(animal);
     }
-  /*  @Override
-    public Set<Animal> getAllAnimals() {
-        Set<Animal> animals;
-        animals = repository.findAll();
-        return animals;
-    }
-*/
+
     @Override
     public ArrayList<Animal> getAllAnimals() {
         try {
@@ -95,5 +89,10 @@ public class AnimalServiceImpl extends Service implements AnimalService {
     @Override
     public Animal updateAnimal(Animal animal) {
         return repository.update(animal);
+    }
+
+    @Override
+    public Animal getAnimal(Long Id) {
+        return repository.findById(Id);
     }
 }

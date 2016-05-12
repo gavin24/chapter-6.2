@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 
+import com.ackerman.j.gavin.zootrack.Domain.Animal;
 import com.ackerman.j.gavin.zootrack.Domain.Employee;
 import com.ackerman.j.gavin.zootrack.Repository.EmployeeRepository;
 import com.ackerman.j.gavin.zootrack.Repository.Impl.EmployeeRepositoryImpl;
@@ -59,5 +60,17 @@ public class EmployeeServiceImpl extends Service implements EmployeeService {
 
         }
         return false;
+    }
+    @Override
+    public Employee addEmployee(Employee employee) {
+        try{
+            return repository.save(employee);
+        }
+        catch(Exception x)
+
+        {
+            x.printStackTrace();
+        }
+        return null;
     }
 }

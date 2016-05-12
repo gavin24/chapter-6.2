@@ -32,17 +32,17 @@ public class AnimalRepositoryImpl extends SQLiteOpenHelper implements AnimalRepo
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_AGE = "age";
     public static final String COLUMN_COUNTRY = "country";
-    public static final String COLUMN_FOOD = "food";
+  //  public static final String COLUMN_FOOD = "food";
 
     // Database creation sql statement
     private static final String DATABASE_CREATE = " CREATE TABLE "
             + TABLE_NAME + "("
             + COLUMN_ID + " INTEGER  PRIMARY KEY AUTOINCREMENT, "
             + COLUMN_NAME + " TEXT  NOT NULL , "
-            + COLUMN_AGE + " INTEGER NOT NULL ),"
+            + COLUMN_AGE + " INTEGER NOT NULL ,"
              + COLUMN_COUNTRY + " TEXT  NOT NULL , "
-             + COLUMN_SPECIES + " TEXT NOT NULL ),"
-             + COLUMN_FOOD + " TEXT NOT NULL );";
+             + COLUMN_SPECIES + " TEXT NOT NULL );";
+          //   + COLUMN_FOOD + " TEXT NOT NULL );";
 
 
     public AnimalRepositoryImpl(Context context) {
@@ -68,8 +68,8 @@ public class AnimalRepositoryImpl extends SQLiteOpenHelper implements AnimalRepo
                         COLUMN_NAME,
                          COLUMN_AGE,
                         COLUMN_COUNTRY,
-                        COLUMN_SPECIES,
-                         COLUMN_FOOD},
+                        COLUMN_SPECIES},
+                     //    COLUMN_FOOD},
                 COLUMN_ID + " =? ",
                 new String[]{String.valueOf(id)},
                 null,

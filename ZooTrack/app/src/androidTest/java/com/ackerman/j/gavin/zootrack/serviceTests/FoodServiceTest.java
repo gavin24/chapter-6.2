@@ -8,7 +8,13 @@ import android.os.IBinder;
 import android.test.AndroidTestCase;
 
 import com.ackerman.j.gavin.zootrack.Domain.Food;
+import com.ackerman.j.gavin.zootrack.Repository.FoodRepository;
+import com.ackerman.j.gavin.zootrack.Repository.Impl.FoodRepositoryImpl;
 import com.ackerman.j.gavin.zootrack.services.Impl.FoodServiceImpl;
+
+import junit.framework.Assert;
+
+import org.junit.Test;
 
 /**
  * Created by gavin.ackerman on 2016-05-11.
@@ -49,4 +55,29 @@ public class FoodServiceTest extends AndroidTestCase {
 
         }
     };
+
+    @Test
+    public void testAddStock() {
+
+        Food createEntity = new Food.Builder()
+                .name("Chicken")
+                .type("Meat")
+                .price(500)
+                .stock(30)
+                .build();
+        foodService.addFood(createEntity);
+       Assert.assertEquals(35, foodService.addStock(5, createEntity));
+
+    }
+    @Test
+    public void testRemoveStock() {
+        Food createEntity = new Food.Builder()
+                .name("Beef")
+                .type("Meat")
+                .price(500)
+                .stock(30)
+                .build();
+        foodService.addFood(createEntity);
+        Assert.assertEquals(25, foodService.removeStock(5, createEntity));
+    }
 }
