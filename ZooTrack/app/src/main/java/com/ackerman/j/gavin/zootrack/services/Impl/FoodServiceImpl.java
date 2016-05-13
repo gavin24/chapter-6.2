@@ -61,7 +61,7 @@ public class FoodServiceImpl extends Service implements FoodService {
 
     @Override
     public int removeStock(int stock,Food food) {
-        //
+
             Food found = repository.findById(food.getId());
             Food updatedFood = new Food.Builder()
                     .id(found.getId())
@@ -70,14 +70,9 @@ public class FoodServiceImpl extends Service implements FoodService {
                     .stock(found.getStock()-stock)
                     .type(found.getType())
                     .build();
-         repository.update(updatedFood);
-        return updatedFood.getStock();
-    /*    }
-        catch(Exception x)
-        {
-            x.printStackTrace();
-        }
-        return false;*/
+            repository.update(updatedFood);
+            return updatedFood.getStock();
+
     }
     @Override
     public Food addFood(Food food) {

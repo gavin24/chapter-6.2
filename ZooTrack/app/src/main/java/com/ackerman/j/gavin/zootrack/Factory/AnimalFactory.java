@@ -8,6 +8,6 @@ import com.ackerman.j.gavin.zootrack.Domain.Food;
  */
 public interface AnimalFactory {
 
-    Animal createAnimal(Long id,String name, String species, int age, String Country,Food food);
+    Animal createAnimal(Long id,String name, String species, int age, String Country);//,Food food);
 
 }

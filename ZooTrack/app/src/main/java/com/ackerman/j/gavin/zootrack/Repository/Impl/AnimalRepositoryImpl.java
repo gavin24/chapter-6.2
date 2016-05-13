@@ -41,7 +41,7 @@ public class AnimalRepositoryImpl extends SQLiteOpenHelper implements AnimalRepo
             + COLUMN_NAME + " TEXT  NOT NULL , "
             + COLUMN_AGE + " INTEGER NOT NULL ,"
              + COLUMN_COUNTRY + " TEXT  NOT NULL , "
-             + COLUMN_SPECIES + " TEXT NOT NULL );";
+             + COLUMN_SPECIES + " TEXT  NULL );";
           //   + COLUMN_FOOD + " TEXT NOT NULL );";
 
 
@@ -79,11 +79,10 @@ public class AnimalRepositoryImpl extends SQLiteOpenHelper implements AnimalRepo
         if (cursor.moveToFirst()) {
             final Animal animal = new Animal.Builder()
                     .id(cursor.getLong(cursor.getColumnIndex(COLUMN_ID)))
-                    .species(cursor.getString(cursor.getColumnIndex(COLUMN_SPECIES)))
                     .name(cursor.getString(cursor.getColumnIndex(COLUMN_NAME)))
                     .age(cursor.getInt(cursor.getColumnIndex(COLUMN_AGE)))
                     .Country(cursor.getString(cursor.getColumnIndex(COLUMN_COUNTRY)))
-
+                    .species(cursor.getString(cursor.getColumnIndex(COLUMN_SPECIES)))
                     .build();
             // Animal animal = new Animal.Builder(id).name(name).species(species).age(age).Country(Country).food(food)
             return animal;
@@ -99,10 +98,10 @@ public class AnimalRepositoryImpl extends SQLiteOpenHelper implements AnimalRepo
         open();
         ContentValues values = new ContentValues();
         values.put(COLUMN_ID, entity.getId());
-        values.put(COLUMN_COUNTRY, entity.getCountry());
         values.put(COLUMN_NAME, entity.getName());
-        values.put(COLUMN_SPECIES, entity.getSpecies());
         values.put(COLUMN_AGE, entity.getAge());
+        values.put(COLUMN_COUNTRY, entity.getCountry());
+        values.put(COLUMN_SPECIES, entity.getSpecies());
         long id = db.insertOrThrow(TABLE_NAME, null, values);
         Animal insertedEntity = new Animal.Builder()
                 .copy(entity)
@@ -116,10 +115,12 @@ public class AnimalRepositoryImpl extends SQLiteOpenHelper implements AnimalRepo
         open();
         ContentValues values = new ContentValues();
         values.put(COLUMN_ID, entity.getId());
-        values.put(COLUMN_COUNTRY, entity.getCountry());
+
         values.put(COLUMN_NAME, entity.getName());
-        values.put(COLUMN_SPECIES, entity.getSpecies());
+
         values.put(COLUMN_AGE, entity.getAge());
+        values.put(COLUMN_COUNTRY, entity.getCountry());
+        values.put(COLUMN_SPECIES, entity.getSpecies());
         db.update(
                 TABLE_NAME,
                 values,

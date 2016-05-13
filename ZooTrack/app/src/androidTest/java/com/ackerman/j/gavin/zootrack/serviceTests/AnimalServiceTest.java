@@ -30,13 +30,13 @@ public class AnimalServiceTest extends AndroidTestCase
         Intent intent = new Intent(this.getContext(), AnimalServiceImpl.class);
         this.mContext.bindService(intent, connection, Context.BIND_AUTO_CREATE);
         //Create
-        testanimal = new Animal.Builder()
+       /* testanimal = new Animal.Builder()
                 .name("John")
                 .species("bearrr")
                 .age(24)
                 .Country("england")
                 .build();
-        animalService.addAnimal(testanimal);
+        animalService.addAnimal(testanimal);*/
     }
 
     private ServiceConnection connection = new ServiceConnection() {
@@ -104,6 +104,7 @@ public class AnimalServiceTest extends AndroidTestCase
         animalService.addAnimal(animal);
 
         Animal updateEntity = new Animal.Builder()
+                .id(animal.getId())
                 .copy(animal)
                 .Country("mexico")
                 .build();

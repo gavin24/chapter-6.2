@@ -44,6 +44,7 @@ public class EmployeeRepoTest extends AndroidTestCase {
 
         //UPDATE ENTITY
         Employee updateEntity = new Employee.Builder()
+                .id(entity.getId())
                 .copy(entity)
                 .name("Peter")
                 .build();

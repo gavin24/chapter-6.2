@@ -43,6 +43,7 @@ public class AnimalRepoTest extends AndroidTestCase {
 
         //UPDATE ENTITY
         Animal updateEntity = new Animal.Builder()
+                .id(entity.getId())
                 .copy(entity)
                 .Country("USA")
                 .build();

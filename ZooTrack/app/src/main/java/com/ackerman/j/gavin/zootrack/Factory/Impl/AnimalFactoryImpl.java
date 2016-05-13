@@ -21,9 +21,9 @@ public class AnimalFactoryImpl implements AnimalFactory {
         return factory;
     }
     @Override
-    public Animal createAnimal(Long id,String name, String species, int age, String Country,Food food)
+    public Animal createAnimal(Long id,String name, String species, int age, String Country)//,Food food)
     {
-        Animal animal = new Animal.Builder().id(id).name(name).species(species).age(age).Country(Country).food(food)
+        Animal animal = new Animal.Builder().id(id).name(name).species(species).age(age).Country(Country)//.food(food)
                 .build();
 
         return animal;

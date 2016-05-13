@@ -47,10 +47,7 @@ public class AnimalServiceImpl extends Service implements AnimalService {
         }
     }
 
-    /*
-    *Used to add an animal to the database
-    *
-     */
+
     @Override
     public Animal addAnimal(Animal animal) {
         try{

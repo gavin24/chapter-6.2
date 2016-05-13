@@ -64,9 +64,9 @@ public class EmployeeRepositoryImpl extends SQLiteOpenHelper implements Employee
                 TABLE_NAME,
                 new String[]{
                         COLUMN_ID,
-                        COLUMN_COUNTRY,
                         COLUMN_SURNAME,
                         COLUMN_AGE,
+                        COLUMN_COUNTRY,
                         COLUMN_PASSWORD,
                         COLUMN_EMAIL,
                         COLUMN_NAME},
@@ -80,11 +80,12 @@ public class EmployeeRepositoryImpl extends SQLiteOpenHelper implements Employee
             final Employee employee = new Employee.Builder()
                     .id(cursor.getLong(cursor.getColumnIndex(COLUMN_ID)))
                     .surname(cursor.getString(cursor.getColumnIndex(COLUMN_SURNAME)))
-                    .name(cursor.getString(cursor.getColumnIndex(COLUMN_NAME)))
                     .age(cursor.getInt(cursor.getColumnIndex(COLUMN_AGE)))
+                    .Country(cursor.getString(cursor.getColumnIndex(COLUMN_COUNTRY)))
                     .password(cursor.getString(cursor.getColumnIndex(COLUMN_PASSWORD)))
                     .email(cursor.getString(cursor.getColumnIndex(COLUMN_EMAIL)))
-                    .Country(cursor.getString(cursor.getColumnIndex(COLUMN_COUNTRY)))
+                    .name(cursor.getString(cursor.getColumnIndex(COLUMN_NAME)))
+
                     .build();
             return employee;
         } else {
@@ -100,11 +101,12 @@ public class EmployeeRepositoryImpl extends SQLiteOpenHelper implements Employee
         ContentValues values = new ContentValues();
         values.put(COLUMN_ID, entity.getId());
         values.put(COLUMN_SURNAME, entity.getsurname());
-        values.put(COLUMN_NAME, entity.getName());
+
         values.put(COLUMN_AGE, entity.getAge());
+        values.put(COLUMN_COUNTRY, entity.getCountry());
         values.put(COLUMN_PASSWORD, entity.getPassword());
         values.put(COLUMN_EMAIL, entity.getEmail());
-        values.put(COLUMN_COUNTRY, entity.getCountry());
+        values.put(COLUMN_NAME, entity.getName());
         long id = db.insertOrThrow(TABLE_NAME, null, values);
         Employee insertedEntity = new Employee.Builder()
                 .copy(entity)
@@ -119,11 +121,12 @@ public class EmployeeRepositoryImpl extends SQLiteOpenHelper implements Employee
         ContentValues values = new ContentValues();
         values.put(COLUMN_ID, entity.getId());
         values.put(COLUMN_SURNAME, entity.getsurname());
-        values.put(COLUMN_NAME, entity.getName());
         values.put(COLUMN_AGE, entity.getAge());
+        values.put(COLUMN_COUNTRY, entity.getCountry());
         values.put(COLUMN_PASSWORD, entity.getPassword());
         values.put(COLUMN_EMAIL, entity.getEmail());
-        values.put(COLUMN_COUNTRY, entity.getCountry());
+        values.put(COLUMN_NAME, entity.getName());
+
         db.update(
                 TABLE_NAME,
                 values,
@@ -154,11 +157,12 @@ public class EmployeeRepositoryImpl extends SQLiteOpenHelper implements Employee
                 final Employee election = new Employee.Builder()
                         .id(cursor.getLong(cursor.getColumnIndex(COLUMN_ID)))
                         .surname(cursor.getString(cursor.getColumnIndex(COLUMN_SURNAME)))
-                        .name(cursor.getString(cursor.getColumnIndex(COLUMN_NAME)))
                         .age(cursor.getInt(cursor.getColumnIndex(COLUMN_AGE)))
+                        .Country(cursor.getString(cursor.getColumnIndex(COLUMN_COUNTRY)))
                         .password(cursor.getString(cursor.getColumnIndex(COLUMN_PASSWORD)))
                         .email(cursor.getString(cursor.getColumnIndex(COLUMN_EMAIL)))
-                        .Country(cursor.getString(cursor.getColumnIndex(COLUMN_COUNTRY)))
+                        .name(cursor.getString(cursor.getColumnIndex(COLUMN_NAME)))
+
                         .build();
                 employee.add(election);
             } while (cursor.moveToNext());

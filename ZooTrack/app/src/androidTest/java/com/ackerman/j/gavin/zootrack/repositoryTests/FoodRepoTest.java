@@ -42,6 +42,7 @@ public class FoodRepoTest extends AndroidTestCase {
 
         //UPDATE ENTITY
         Food updateEntity = new Food.Builder()
+                .id(entity.getId())
                 .copy(entity)
                 .name("beef")
                 .build();
